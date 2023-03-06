@@ -35,10 +35,10 @@ final class RequiredPropertyTests: XCTestCase {
   
   func testString() {
     var a = A()
-    print(a.checkRequiredProperty())
+    XCTAssertEqual(a.checkRequiredProperty(), .invalid("name, address, b"))
     a.name = "ss"
     a.address = "aaaa"
-    print(a.checkRequiredProperty())
+    XCTAssertEqual(a.checkRequiredProperty(), .invalid("b"))
   }
   
   func testInsideRequiredProperty() {
@@ -46,9 +46,9 @@ final class RequiredPropertyTests: XCTestCase {
     a.name = "ss"
     a.address = "aaaa"
     a.b = B()
-    print(a.checkRequiredProperty())
+    XCTAssertEqual(a.checkRequiredProperty(), .invalid("b.name"))
     a.b?.name = "bbb"
-    print(a.checkRequiredProperty())
+    XCTAssertEqual(a.checkRequiredProperty(), .valid)
   }
   
 }

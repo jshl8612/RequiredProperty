@@ -20,6 +20,20 @@ enum RequiredPropertyResult {
     }
   }
 }
+
+extension RequiredPropertyResult: Equatable {
+  static func == (lhs: RequiredPropertyResult, rhs: RequiredPropertyResult) -> Bool {
+    switch (lhs, rhs) {
+    case (.invalid(let lMsg), .invalid(let rMsg)):
+      return lMsg == rMsg
+    case (.valid, .valid):
+      return true
+    default:
+      return false
+    }
+  }
+}
+
 protocol RequiredProperty {
     var keys: [String] {get}
 }
@@ -60,7 +74,7 @@ extension RequiredProperty {
         }
         continue
       default:
-        continue
+        break
       }
     }
     return result
