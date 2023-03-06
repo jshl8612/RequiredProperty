@@ -7,76 +7,56 @@
 
 import Foundation
 
-enum RequiredPropertyResult {
-  case valid
-  case invalid(String)
-  
-  mutating func appendInvalid(_ errorMsg: String) {
-    switch self {
-    case .valid:
-      self = RequiredPropertyResult.invalid("\(errorMsg)")
-    case .invalid(let msg):
-      self = RequiredPropertyResult.invalid(msg+", "+errorMsg)
-    }
-  }
-}
+public enum RequiredPropertyErrorType: Equatable, CustomStringConvertible {
+  case isNil
+  case isEmpty
+  case invalidKey
 
-extension RequiredPropertyResult: Equatable {
-  static func == (lhs: RequiredPropertyResult, rhs: RequiredPropertyResult) -> Bool {
-    switch (lhs, rhs) {
-    case (.invalid(let lMsg), .invalid(let rMsg)):
-      return lMsg == rMsg
-    case (.valid, .valid):
-      return true
-    default:
-      return false
+  public var description: String {
+    switch self {
+    case .isNil:
+      return "is Nil"
+    case .isEmpty:
+      return "is Empty"
+    case .invalidKey:
+      return "is invalid"
     }
   }
 }
 
 protocol RequiredProperty {
-    var keys: [String] {get}
+  typealias Result = [String: RequiredPropertyErrorType]
+  var keys: [String] {get}
 }
+
 extension RequiredProperty {
-  
-  func checkRequiredProperty() -> RequiredPropertyResult {
+  func checkRequiredProperty() -> Result? {
     let mirror = Mirror(reflecting: self)
-    var result = RequiredPropertyResult.valid
+    var result = Result()
     
     for key in keys {
       guard let target = mirror.descendant(key) else {
-        result.appendInvalid(key)
+        result[key] = .invalidKey
         continue
       }
-      
       switch target {
-      case let value as String:
-        if value.isEmpty {
-          result.appendInvalid(key)
-        }
-        continue
-      case let value as RequiredProperty:
-        if case RequiredPropertyResult.invalid(let property) = value.checkRequiredProperty() {
-          result.appendInvalid("\(key).\(property)")
-        }
-        continue
       case Optional<Any>.none:
-        result.appendInvalid("\(key)")
+        result[key] = .isNil
         continue
-      case Optional<String>.some(let value):
-        if value.isEmpty {
-          result.appendInvalid(key)
-        }
+      case let value as String, Optional<String>.some(let value):
+        RequiredPropertyChecker<String>().check(value, key: key, result: &result)
         continue
-      case Optional<RequiredProperty>.some(let value):
-        if case RequiredPropertyResult.invalid(let property) = value.checkRequiredProperty() {
-          result.appendInvalid("\(key).\(property)")
-        }
+      case let value as RequiredProperty, Optional<RequiredProperty>.some(let value):
+        RequiredPropertyChecker<RequiredProperty>().check(value, key: key, result: &result)
+        continue
+      case let value as Array<Any>, Optional<Array<Any>>.some(let value):
+        RequiredPropertyChecker<Array<Any>>().check(value, key: key, result: &result)
         continue
       default:
         break
       }
     }
-    return result
+    
+    return result.isEmpty ? nil : result
   }
 }

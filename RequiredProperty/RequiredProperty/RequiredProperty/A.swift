@@ -12,6 +12,8 @@ struct A {
   var age: Int = 0
   var address: String = ""
   var b: B?
+  var bList: [B] = []
+  var bListOptional: [B]?
 }
 
 extension A: RequiredProperty {

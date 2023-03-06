@@ -20,6 +20,9 @@
 		E50B035B29B1D2BF007B5E41 /* RequiredProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B035929B1D2AD007B5E41 /* RequiredProperty.swift */; };
 		E50B035E29B59384007B5E41 /* A.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B035D29B59384007B5E41 /* A.swift */; };
 		E50B036029B5938B007B5E41 /* B.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B035F29B5938B007B5E41 /* B.swift */; };
+		E50B036229B5A6BF007B5E41 /* RequiredPropertyChecker in Sources */ = {isa = PBXBuildFile; fileRef = E50B036129B5A6BF007B5E41 /* RequiredPropertyChecker */; };
+		E50B036429B5C12E007B5E41 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50B036329B5C12E007B5E41 /* C.swift */; };
+		E50B036529B5C832007B5E41 /* RequiredPropertyChecker in Sources */ = {isa = PBXBuildFile; fileRef = E50B036129B5A6BF007B5E41 /* RequiredPropertyChecker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,8 @@
 		E50B035929B1D2AD007B5E41 /* RequiredProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequiredProperty.swift; sourceTree = "<group>"; };
 		E50B035D29B59384007B5E41 /* A.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A.swift; sourceTree = "<group>"; };
 		E50B035F29B5938B007B5E41 /* B.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = B.swift; sourceTree = "<group>"; };
+		E50B036129B5A6BF007B5E41 /* RequiredPropertyChecker */ = {isa = PBXFileReference; lastKnownFileType = text; path = RequiredPropertyChecker; sourceTree = "<group>"; };
+		E50B036329B5C12E007B5E41 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +144,10 @@
 			isa = PBXGroup;
 			children = (
 				E50B035929B1D2AD007B5E41 /* RequiredProperty.swift */,
+				E50B036129B5A6BF007B5E41 /* RequiredPropertyChecker */,
 				E50B035D29B59384007B5E41 /* A.swift */,
 				E50B035F29B5938B007B5E41 /* B.swift */,
+				E50B036329B5C12E007B5E41 /* C.swift */,
 			);
 			path = RequiredProperty;
 			sourceTree = "<group>";
@@ -277,9 +284,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E50B036029B5938B007B5E41 /* B.swift in Sources */,
+				E50B036229B5A6BF007B5E41 /* RequiredPropertyChecker in Sources */,
 				E50B032D29B1D285007B5E41 /* ViewController.swift in Sources */,
 				E50B035E29B59384007B5E41 /* A.swift in Sources */,
 				E50B032929B1D285007B5E41 /* AppDelegate.swift in Sources */,
+				E50B036429B5C12E007B5E41 /* C.swift in Sources */,
 				E50B032B29B1D285007B5E41 /* SceneDelegate.swift in Sources */,
 				E50B035A29B1D2AD007B5E41 /* RequiredProperty.swift in Sources */,
 			);
@@ -291,6 +300,7 @@
 			files = (
 				E50B034029B1D286007B5E41 /* RequiredPropertyTests.swift in Sources */,
 				E50B035B29B1D2BF007B5E41 /* RequiredProperty.swift in Sources */,
+				E50B036529B5C832007B5E41 /* RequiredPropertyChecker in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

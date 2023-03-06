@@ -35,10 +35,17 @@ final class RequiredPropertyTests: XCTestCase {
   
   func testString() {
     var a = A()
-    XCTAssertEqual(a.checkRequiredProperty(), .invalid("name, address, b"))
+    if let result = a.checkRequiredProperty() {
+      XCTAssertEqual(result["name"], .isNil)
+      XCTAssertEqual(result["address"], .isEmpty)
+      XCTAssertEqual(result["b"], .isNil)
+    }
+    
     a.name = "ss"
     a.address = "aaaa"
-    XCTAssertEqual(a.checkRequiredProperty(), .invalid("b"))
+    if let result = a.checkRequiredProperty() {
+      XCTAssertEqual(result["b"], .isNil)
+    }
   }
   
   func testInsideRequiredProperty() {
@@ -46,9 +53,49 @@ final class RequiredPropertyTests: XCTestCase {
     a.name = "ss"
     a.address = "aaaa"
     a.b = B()
-    XCTAssertEqual(a.checkRequiredProperty(), .invalid("b.name"))
-    a.b?.name = "bbb"
-    XCTAssertEqual(a.checkRequiredProperty(), .valid)
+    
+    if let result = a.checkRequiredProperty() {
+      XCTAssertEqual(result["b.name"], .isNil)
+    }
+    a.b?.name = ""
+    if let result = a.checkRequiredProperty() {
+      XCTAssertEqual(result["b.name"], .isEmpty)
+    }
+    a.b?.name = "aaa"
+    if let result = a.checkRequiredProperty() {
+      XCTAssertEqual(result, nil)
+    }
   }
   
+  func testArray() {
+    var c = C()
+    
+    if let result = c.checkRequiredProperty() {
+      XCTAssertEqual(result["aList"], .isEmpty)
+      XCTAssertEqual(result["bList"], .isEmpty)
+      XCTAssertEqual(result["aListOp"], .isNil)
+      XCTAssertEqual(result["bListOp"], .isNil)
+    }
+    
+    c.aList = [A()]
+    if let result = c.checkRequiredProperty() {
+      XCTAssertEqual(result["aList.0.name"], .isNil)
+      XCTAssertEqual(result["aList.0.address"], .isEmpty)
+      XCTAssertEqual(result["aList.0.b"], .isNil)
+    }
+    
+    c.aList[0].name = "ss"
+    c.aList[0].address = "aaaa"
+    
+    if let result = c.checkRequiredProperty() {
+      XCTAssertEqual(result["aList.0.name"], nil)
+      XCTAssertEqual(result["aList.0.address"], nil)
+      XCTAssertEqual(result["aList.0.b"], .isNil)
+    }
+    
+    c.aList[0].b = B()
+    if let result = c.checkRequiredProperty() {
+      XCTAssertEqual(result["aList.0.b.name"], .isNil)
+    }
+  }
 }
