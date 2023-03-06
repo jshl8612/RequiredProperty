@@ -26,7 +26,7 @@ public enum RequiredPropertyErrorType: Equatable, CustomStringConvertible {
 
 protocol RequiredProperty {
   typealias Result = [String: RequiredPropertyErrorType]
-  var keys: [String] {get}
+  var requiredKeys: [String] {get}
 }
 
 extension RequiredProperty {
@@ -34,7 +34,7 @@ extension RequiredProperty {
     let mirror = Mirror(reflecting: self)
     var result = Result()
     
-    for key in keys {
+    for key in requiredKeys {
       guard let target = mirror.descendant(key) else {
         result[key] = .invalidKey
         continue
