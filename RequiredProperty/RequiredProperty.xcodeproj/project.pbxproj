@@ -114,6 +114,7 @@
 				E50B032829B1D285007B5E41 /* AppDelegate.swift */,
 				E50B032A29B1D285007B5E41 /* SceneDelegate.swift */,
 				E50B032C29B1D285007B5E41 /* ViewController.swift */,
+				E50B036629B5CB62007B5E41 /* DataModel */,
 				E50B035829B1D28C007B5E41 /* RequiredProperty */,
 				E50B032E29B1D285007B5E41 /* Main.storyboard */,
 				E50B033129B1D286007B5E41 /* Assets.xcassets */,
@@ -145,11 +146,18 @@
 			children = (
 				E50B035929B1D2AD007B5E41 /* RequiredProperty.swift */,
 				E50B036129B5A6BF007B5E41 /* RequiredPropertyChecker.swift */,
+			);
+			path = RequiredProperty;
+			sourceTree = "<group>";
+		};
+		E50B036629B5CB62007B5E41 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
 				E50B035D29B59384007B5E41 /* A.swift */,
 				E50B035F29B5938B007B5E41 /* B.swift */,
 				E50B036329B5C12E007B5E41 /* C.swift */,
 			);
-			path = RequiredProperty;
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -477,6 +485,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,6 +514,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
